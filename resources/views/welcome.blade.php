@@ -89,7 +89,7 @@
                                 </span>
                             </span>
                             <span>
-                                garajam sap olas
+                                Watch video tutorials at
                                 <a href="https://laracasts.com" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433] ml-1">
                                     <span>Laracasts</span>
                                     <svg
@@ -269,9 +269,12 @@
                 </div>
             </main>
         </div>
-
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
-    </body>
+        <!-- Vari vairākas kartes pēc vajadzības -->
+    </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; {{ date('Y') }} Klikšķis. Visas tiesības paturētas.</p>
+    </footer>
+</body>
 </html>
