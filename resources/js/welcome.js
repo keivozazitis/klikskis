@@ -2,7 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));
 
     cards.forEach(card => {
+        // ======================
         // Swipe karte + pēdējās kartes redirect
+        // ======================
         const likeBtn = card.querySelector('.like');
         const dislikeBtn = card.querySelector('.dislike');
 
@@ -25,12 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
         likeBtn.addEventListener('click', () => swipeCard('like'));
         dislikeBtn.addEventListener('click', () => swipeCard('dislike'));
 
-        // Image slider
+        // ======================
+        // Image slider ar indikatoriem
+        // ======================
         const images = card.querySelectorAll('.card-images img');
+        const indicators = card.querySelectorAll('.image-indicators .indicator');
         let current = 0;
 
         const showImage = (index) => {
             images.forEach((img, i) => img.classList.toggle('active', i === index));
+            indicators.forEach((ind, i) => ind.classList.toggle('active', i === index));
         };
 
         const prevBtn = card.querySelector('.prev');

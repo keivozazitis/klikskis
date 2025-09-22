@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="lv" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Registration Form</title>
+  <title>Reģistrēties</title>
   @vite(['resources/css/register.css'])
 </head>
 <body>
@@ -12,30 +12,35 @@
     <div class="title">Reģistrēties</div>
     <div class="content">
       <!-- Registration form -->
-      <form action="#">
+      <form action="{{ route('register') }}" method="POST">
+        @csrf
+
         <div class="user-details">
           <!-- Vārds -->
           <div class="input-box">
             <span class="details">Vārds</span>
-            <input type="text" placeholder="Ievadi vārdu" required>
+            <input type="text" name="first_name" placeholder="Ievadi vārdu" required>
           </div>
           <!-- Uzvārds -->
           <div class="input-box">
             <span class="details">Uzvārds</span>
-            <input type="text" placeholder="Ievadi uzvārdu" required>
+            <input type="text" name="last_name" placeholder="Ievadi uzvārdu" required>
           </div>
           <!-- E-pasts -->
           <div class="input-box">
             <span class="details">E-pasts</span>
-            <input type="text" placeholder="Ievadi e-pastu" required>
+            <input type="email" name="email" placeholder="Ievadi e-pastu" required>
           </div>
           <!-- Dzimšanas datums -->
           <div class="input-box">
             <span class="details">Dzimšanas datums</span>
             <input type="date" id="birth_date" name="birth_date" required>
-            <span id="birth_error" style="color: red;">Atceries! Tev jābūt vismaz 16 gadus vecam!</span>
+            <span id="birth_error" style="color: red; display: none;">
+              Atceries! Tev jābūt vismaz 16 gadus vecam!
+            </span>
           </div>
 
+          <!-- JS vecuma pārbaude -->
           <script>
             const birthInput = document.getElementById('birth_date');
             const birthError = document.getElementById('birth_error');
@@ -65,19 +70,19 @@
           <!-- Parole -->
           <div class="input-box">
             <span class="details">Parole</span>
-            <input type="text" placeholder="Ievadi paroli" required>
+            <input type="password" name="password" placeholder="Ievadi paroli" required>
           </div>
           <!-- Apstiprini paroli -->
           <div class="input-box">
             <span class="details">Apstiprini paroli</span>
-            <input type="text" placeholder="Apstiprini paroli" required>
+            <input type="password" name="password_confirmation" placeholder="Apstiprini paroli" required>
           </div>
         </div>
 
         <!-- Gender selection -->
         <div class="gender-details">
-          <input type="radio" name="gender" id="dot-1">
-          <input type="radio" name="gender" id="dot-2">
+          <input type="radio" name="gender" id="dot-1" value="male" required>
+          <input type="radio" name="gender" id="dot-2" value="female">
           <span class="gender-title">Dzimums</span>
           <div class="category">
             <label for="dot-1">
