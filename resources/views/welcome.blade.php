@@ -19,10 +19,22 @@
         <h2>Klikšķis</h2>
         <nav>
             <a href="/">Sākums</a>
-            <a href="/login_register">Reģistrēties</a>
+            @guest
+                <a href="{{ route('register.form') }}">Reģistrēties</a>
+                <a href="{{ route('login.form') }}">Ielogoties</a>
+            @endguest
             <a href="#" class="highlight-link">FreakClick</a>
             <a href="#">Čati</a>
             <a href="#">Profils</a>
+            @auth
+                <form action="{{ route('logout') }}" method="POST" style="margin-top:320px; text-align:center; font-size:30px">
+                    <p style="margin:10px 0;">Sveiks, {{ auth()->user()->first_name }}!</p>
+                    @csrf
+                    <button type="submit" style="padding:16px 80px; font-size:20px; background:#9e36f4; color:white; border:none; border-radius:5px; cursor:pointer;">
+                        Logout
+                    </button>
+                </form>
+            @endauth
         </nav>
     </aside>
 
@@ -34,7 +46,15 @@
                 <h1 class="logo">Klikšķis</h1>
                 <nav class="nav">
                     <a href="/">Sākums</a>
-                    <a href="/login_register">Reģistrēties</a>
+                    @guest
+                        <a href="{{ route('login.form') }}">Ielogoties</a>
+                        <a href="{{ route('register.form') }}">Reģistrēties</a>
+                    @endguest
+                    @auth
+                        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                            @csrf
+                        </form>
+                    @endauth
                 </nav>
             </div>
         </header>
@@ -46,12 +66,8 @@
                     <div class="card-images">
                         <img src="{{ asset('storage/download.jpg') }}" class="active" alt="Bild1">
                         <img src="{{ asset('storage/images.jpg') }}" alt="Bild2">
-
-                        <!-- Prev / Next bultiņas -->
                         <button class="prev">⟨</button>
                         <button class="next">⟩</button>
-
-                        <!-- Image indicators -->
                         <div class="image-indicators">
                             <span class="indicator active"></span>
                             <span class="indicator"></span>
@@ -74,12 +90,8 @@
                         <img src="{{ asset('storage/F30ED56D-6903-4B5F-8AE7-3404FB69F2B9.png') }}" alt="Bild2">
                         <img src="{{ asset('storage/F30E54C2-1D74-4AB1-B461-47C92887C7B6.png') }}" alt="Bild3">
                         <img src="{{ asset('storage/BD9F46B9-C41B-4AC3-A7E0-F2B8AC03679C.png') }}" alt="Bild4">
-
-                        <!-- Prev / Next bultiņas -->
                         <button class="prev">⟨</button>
                         <button class="next">⟩</button>
-
-                        <!-- Image indicators -->
                         <div class="image-indicators">
                             <span class="indicator active"></span>
                             <span class="indicator"></span>
@@ -88,7 +100,7 @@
                         </div>
                     </div>
                     <div class="card-info">
-                        <h3>Aldis Zabadskis, 27</h3>
+                        <h3>Aldis Zabadskis, 67</h3>
                         <p>Intereses: Freak, kefīrs, dj bobo</p>
                     </div>
                     <div class="card-actions">
@@ -101,12 +113,8 @@
                 <div class="card">
                     <div class="card-images">
                         <img src="{{ asset('storage/461710730_8378060218974229_7977418704910948490_n.jpg') }}" class="active" alt="Bild1">
-
-                        <!-- Prev / Next bultiņas -->
                         <button class="prev">⟨</button>
                         <button class="next">⟩</button>
-
-                        <!-- Image indicators -->
                         <div class="image-indicators">
                             <span class="indicator active"></span>
                         </div>

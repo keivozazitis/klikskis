@@ -101,6 +101,10 @@
           <input type="submit" value="Reģistrēties">
         </div>
       </form>
+      <div class="extra-link" style="margin-top:15px; text-align:center;">
+        <span>Tev jau ir konts? </span>
+        <a href="/login">Ielogojies šeit</a>
+      </div>
     </div>
   </div>
 </body>

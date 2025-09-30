@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +12,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Seed sākotnējos reģionus
+        $this->call(RegionsTableSeeder::class);
 
+        // Seed testa lietotāju
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'first_name' => 'Test',
+            'last_name'  => 'User',
+            'email'      => 'test@example.com',
+            'password'   => bcrypt('password'), // default parole
+            'region_id'  => 1, // Kurzeme
+            'weight'     => 70,
+            'augums'     => 180,
         ]);
     }
 }
