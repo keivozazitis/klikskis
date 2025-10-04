@@ -150,7 +150,14 @@ body {
 .image-indicators .indicator.active {
     background: #fff;
 }
-
+.card-images .prev[style*="display: none"],
+.card-images .next[style*="display: none"],
+.card-images .image-indicators[style*="display: none"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
 .card-images img {
     width: 100%;
     height: 100%;

@@ -43,7 +43,9 @@
         <!-- Header -->
         <header class="header">
             <div class="container">
-                <h1 class="logo">Klikšķis</h1>
+                <a href="/" class="logo">
+                    <img src="{{ asset('storage/Screenshot_2025-10-04_172333-removebg-preview.png') }}" alt="Klikšķis logo" style="height:60px;">
+                </a>
                 <nav class="nav">
                     <a href="/">Sākums</a>
                     @guest
@@ -51,9 +53,7 @@
                         <a href="{{ route('register.form') }}">Reģistrēties</a>
                     @endguest
                     @auth
-                        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                            @csrf
-                        </form>
+                        <a href="{{ route('profile.edit') }}">Profils</a>
                     @endauth
                 </nav>
             </div>
@@ -61,6 +61,24 @@
 
         <section class="cards-section">
             <div class="cards-container">
+                <div class="card">
+                    <div class="card-images">
+                        <img src="{{ asset('storage/461710730_8378060218974229_7977418704910948490_n.jpg') }}" class="active" alt="Bild1">
+                        <img src="{{ asset('storage/garumins.png') }}" alt="Bild2">
+                        <button class="prev">⟨</button>
+                        <button class="next">⟩</button>
+                        <div class="image-indicators"></div> <!-- šis bija jāpieliek -->
+
+                    </div>
+                    <div class="card-info">
+                        <h3>Roberts Mačs, 22</h3>
+                        <p>Intereses: Basketbols, zem tupeles, maisini</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="dislike">✖</button>
+                        <button class="like">❤</button>
+                    </div>
+                </div>
                 <!-- Card 1 -->
                 <div class="card">
                     <div class="card-images">
@@ -110,24 +128,7 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="card">
-                    <div class="card-images">
-                        <img src="{{ asset('storage/461710730_8378060218974229_7977418704910948490_n.jpg') }}" class="active" alt="Bild1">
-                        <button class="prev">⟨</button>
-                        <button class="next">⟩</button>
-                        <div class="image-indicators">
-                            <span class="indicator active"></span>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <h3>Roberts Mačs, 22</h3>
-                        <p>Intereses: Basketbols, zem tupeles, maisini</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="dislike">✖</button>
-                        <button class="like">❤</button>
-                    </div>
-                </div>
+                
             </div>
         </section>
 
