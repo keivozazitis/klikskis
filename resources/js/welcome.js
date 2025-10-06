@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 card.remove();
                 if (document.querySelectorAll('.card').length === 0) {
-                    window.location.href = '/login_register';
+                    window.location.href = '/register';
                 }
             }, 300);
         };

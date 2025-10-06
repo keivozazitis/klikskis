@@ -67,7 +67,7 @@
                         <img src="{{ asset('storage/garumins.png') }}" alt="Bild2">
                         <button class="prev">⟨</button>
                         <button class="next">⟩</button>
-                        <div class="image-indicators"></div> <!-- šis bija jāpieliek -->
+                        <div class="image-indicators"></div>
 
                     </div>
                     <div class="card-info">
@@ -125,10 +125,7 @@
                         <button class="dislike">✖</button>
                         <button class="like">❤</button>
                     </div>
-                </div>
-
-                <!-- Card 3 -->
-                
+                </div>                
             </div>
         </section>
 

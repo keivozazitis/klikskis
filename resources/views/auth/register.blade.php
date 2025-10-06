@@ -98,7 +98,7 @@
 
         <!-- Submit button -->
         <div class="button">
-          <input type="submit" value="Reģistrēties">
+          <input type="submit" value="Reģistrēties" onclick="/login">
         </div>
       </form>
       <div class="extra-link" style="margin-top:15px; text-align:center;">

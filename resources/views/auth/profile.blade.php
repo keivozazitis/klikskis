@@ -33,7 +33,10 @@
             <!-- Dzimšanas datums (nemaināms) -->
             <div class="input-box">
                 <span class="details">Dzimšanas datums</span>
-                <input type="date" value="{{ $user->birth_date }}" disabled>
+                <input 
+                    type="date" 
+                    value="{{ \Carbon\Carbon::parse(str_replace('/', '-', $user->birth_date))->format('Y-m-d') }}" 
+                    disabled>
             </div>
             <!-- Dzimums (var redzēt, bet nevar mainīt) -->
             <div class="input-box">
@@ -50,6 +53,25 @@
             <span class="details">Profila bilde</span>
             <input type="file" name="profile_photo" accept="image/*">
           </div>
+          <div class="input-box">
+            <span class="details">Svars (kg)</span>
+            <input type="number" name="weight">
+          </div>
+          <div class="input-box">
+            <span class="details">Bio</span>
+            <input type="text" name="bio">
+          </div>
+          <div class="input-box">
+            <span class="details">Novads</span>
+            <select name="region_id" required>
+                <option value="">Izvēlies novadu</option>
+                @foreach($regions as $region)
+                    <option value="{{ $region->id }}" {{ $user->region_id == $region->id ? 'selected' : '' }}>
+                        {{ $region->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
         </div>
 
         <div class="button">

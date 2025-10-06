@@ -3,61 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
     /**
-     * Rāda profila rediģēšanas formu.
-     *
-     * @return \Illuminate\View\View
+     * Rāda profila rediģēšanas formu
      */
     public function edit()
     {
         /** @var User $user */
         $user = Auth::user();
+        $regions = Region::all(); // Iegūst visus novadus no datubāzes
 
-        return view('auth.profile', compact('user'));
-
+        return view('auth.profile', compact('user', 'regions'));
     }
 
     /**
-     * Saglabā izmaiņas lietotāja profilā.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Atjaunina lietotāja profilu datubāzē
      */
     public function update(Request $request)
     {
         /** @var User $user */
         $user = Auth::user();
 
+        // Validācija
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'birth_date' => 'required|date',
-            'gender' => 'required|in:male,female',
-            'password' => 'nullable|string|min:8|confirmed',
-            'profile_photo' => 'nullable|image|max:2048', // max 2MB
+            'weight' => 'nullable|numeric|min:0|max:500',
+            'bio' => 'nullable|string|max:500',
+            'region_id' => 'required|exists:regions,id',
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // max 2MB
         ]);
 
-        // Atjaunojam pamata informāciju
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->birth_date = $request->birth_date;
-        $user->gender = $request->gender;
+        // Saglabā papildu laukus
+        $user->weight = $request->weight ?? $user->weight;
+        $user->bio = $request->bio ?? $user->bio;
+        $user->region_id = $request->region_id;
 
-        // Paroles atjaunināšana (ja ievadīta)
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
-        }
-
-        // Profila bildes atjaunināšana (ja augšupielādēta)
+        // Profila bilde
         if ($request->hasFile('profile_photo')) {
-            $path = $request->file('profile_photo')->store('profile_photos', 'public');
-            $user->profile_photo = $path;
+            // Dzēš veco bildi, ja tā eksistē
+            if ($user->profile_photo && Storage::exists('public/' . $user->profile_photo)) {
+                Storage::delete('public/' . $user->profile_photo);
+            }
+
+            $user->profile_photo = $request->file('profile_photo')->store('profile_photos', 'public');
         }
 
         // Saglabā izmaiņas datubāzē
