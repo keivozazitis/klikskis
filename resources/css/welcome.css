@@ -1,4 +1,6 @@
-/* Global */
+/* =========================
+   Global
+========================= */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -6,7 +8,9 @@ body {
     color: #333;
 }
 
-/* Header */
+/* =========================
+   Header
+========================= */
 .header {
     background: #c8c8c8;
     border-bottom: 1px solid #aaa;
@@ -35,7 +39,9 @@ body {
     color: #b700ff;
 }
 
-/* Hero Section */
+/* =========================
+   Hero Section
+========================= */
 .hero {
     text-align: center;
     padding: 80px 20px;
@@ -55,8 +61,8 @@ body {
     padding: 12px 24px;
     margin: 5px;
     border-radius: 5px;
-    text-decoration: none;
     font-weight: bold;
+    text-decoration: none;
     transition: 0.3s;
 }
 .hero-buttons .btn {
@@ -76,7 +82,9 @@ body {
     color: #571870;
 }
 
-/* Footer */
+/* =========================
+   Footer
+========================= */
 .footer {
     text-align: center;
     padding: 20px;
@@ -86,7 +94,9 @@ body {
     color: black;
 }
 
-/* Cards Section */
+/* =========================
+   Cards Section
+========================= */
 .cards-section {
     display: flex;
     justify-content: center;
@@ -101,15 +111,14 @@ body {
 }
 .card {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    inset: 0; /* saīsina width:100% + height:100% */
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
     transition: all 0.3s ease;
 }
 
@@ -117,8 +126,37 @@ body {
 .card-images {
     position: relative;
     height: 60%;    
-    overflow: hidden;
     border-bottom: 1px solid #ddd;
+    overflow: hidden;
+}
+
+/* Image Indicators */
+.image-indicators {
+    position: absolute;
+    top: 10px;  /* virs bildēm */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+}
+.image-indicators .indicator {
+    width: 30px;
+    height: 4px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 2px;
+    transition: background 0.3s, width 0.3s;
+}
+.image-indicators .indicator.active {
+    background: #fff;
+}
+.card-images .prev[style*="display: none"],
+.card-images .next[style*="display: none"],
+.card-images .image-indicators[style*="display: none"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 .card-images img {
     width: 100%;
@@ -131,6 +169,26 @@ body {
     display: block;
     opacity: 1;
 }
+
+/* Prev / Next (virs bildes) */
+.card-images .prev,
+.card-images .next {
+    position: absolute;
+    top: 10px; /* nedaudz zem augšas */
+    width: 40px;
+    height: 40px;
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 20;
+}
+.card-images .prev { left: 10px; }
+.card-images .next { right: 10px; }
 
 /* Card Info */
 .card-info {
@@ -154,41 +212,106 @@ body {
 }
 .card-actions button {
     font-size: 24px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
     border: none;
     cursor: pointer;
     transition: transform 0.3s;
+    border-radius: 50%;
 }
 
-/* Like / Dislike Buttons */
+/* Like / Dislike */
+.card-actions .like,
+.card-actions .dislike {
+    width: 60px;
+    height: 60px;
+}
 .card-actions .like {
     background: #ff4d6d;
     color: #fff;
 }
-.card-actions .like:hover {
-    transform: scale(1.1);
-}
 .card-actions .dislike {
     background: #ccc;
 }
+.card-actions .like:hover,
 .card-actions .dislike:hover {
     transform: scale(1.1);
 }
 
-/* Prev / Next for Images */
-.card-actions button.prev,
-.card-actions button.next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;   
-    background: rgba(0,0,0,0.3);
+/* =========================
+   Sidebar
+========================= */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 240px;
+    background: #571870;
     color: #fff;
-    border-radius: 50%;
-    font-size: 24px;
+    padding: 60px 20px;
+    border-right: 2px solid #dd88ff;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
 }
-.card-actions button.prev { left: 10px; }
-.card-actions button.next { right: 10px; }
+.sidebar.active {
+    transform: translateX(0);
+}
+/* freakclick bolds */
+.sidebar nav a.highlight-link {
+    color: #2b0739;
+    font-weight: 600;
+}
+/* Virsraksts */
+.sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 10px;
+}
+
+/* Navigācija */
+.sidebar nav a {
+    display: block;
+    margin: 12px 0;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+    padding: 8px 10px;
+    border-radius: 6px;
+}
+.sidebar nav a:hover {
+    background: #dd88ff;
+    color: #571870;
+}
+
+/* Sidebar toggle poga */
+.sidebar-toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: #571870;
+    color: #fff;
+    border: 2px solid #dd88ff;
+    padding: 8px 12px;
+    cursor: pointer;
+    z-index: 1100;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.sidebar-toggle:hover {
+    background: #dd88ff;
+    color: #571870;
+    border-color: #571870;
+}
+
+/* Galvenais saturs */
+.main-content {
+    margin-left: 0;
+    transition: margin-left 0.3s ease;
+}
+.sidebar.active ~ .main-content {
+    margin-left: 240px;
+}
