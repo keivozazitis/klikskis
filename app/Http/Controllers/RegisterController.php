@@ -8,13 +8,11 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    // Parāda reģistrācijas formu
     public function show()
     {
         return view('auth.register');
     }
 
-    // Saglabā lietotāju datubāzē
     public function store(Request $request)
     {
         $request->validate([
@@ -39,7 +37,7 @@ class RegisterController extends Controller
             'bio'        => $request->bio,
             'region_id'  => $request->region_id,
             'augums'     => $request->augums,
-            'images'     => json_encode([]), // tukš masīvs sākumā
+            'images'     => json_encode([]),
             'email'      => $request->email,
             'password'   => Hash::make($request->password),
         ]);

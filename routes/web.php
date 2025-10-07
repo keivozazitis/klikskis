@@ -10,7 +10,9 @@ use App\Http\Controllers\ProfileController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/driz', function () {
+    return view('main');
+});
 Route::get('/login', [LoginController::class, 'show'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

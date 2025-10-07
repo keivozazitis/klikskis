@@ -10,9 +10,6 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * Mass assignable attributes
-     */
     protected $fillable = [
         'first_name',
         'last_name',
@@ -27,17 +24,12 @@ class User extends Authenticatable
         'password',
     ];
 
-    /**
-     * Hidden attributes
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Attribute casts
-     */
+
     protected $casts = [
         'birth_date' => 'date',
         'images' => 'array',

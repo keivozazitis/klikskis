@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SwipeApp</title>
+    <title>Klikšķis</title>
     @vite([
         'resources/css/welcome.css',
         'resources/css/sidebar.css',
@@ -25,10 +25,10 @@
             @endguest
             <a href="#" class="highlight-link">FreakClick</a>
             <a href="#">Čati</a>
-            <a href="#">Profils</a>
+            <a href="/profile">Profils</a>
             @auth
                 <form action="{{ route('logout') }}" method="POST" style="margin-top:320px; text-align:center; font-size:30px">
-                    <p style="margin:10px 0;">Sveiks, {{ auth()->user()->first_name }}!</p>
+                    <p style="margin:10px 0;">Sveiki, {{ auth()->user()->first_name }}!</p>
                     @csrf
                     <button type="submit" style="padding:16px 80px; font-size:20px; background:#9e36f4; color:white; border:none; border-radius:5px; cursor:pointer;">
                         Logout

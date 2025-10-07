@@ -9,6 +9,5 @@ class Region extends Model
 {
     use HasFactory;
 
-    // Šeit norādi, kurus laukus var masīvi piešķirt
     protected $fillable = ['name'];
 }
