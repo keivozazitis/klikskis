@@ -10,12 +10,10 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
- 
     public function show()
     {
         return view('auth.login');
     }
-
 
     public function login(Request $request)
     {
@@ -25,18 +23,18 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
 
+        // Atrodam lietotāju pēc e-pasta
         $user = User::where('email', $request->email)->first();
 
-    
-        if (!$user) {
-            return back()->withErrors(['email' => 'Šāds e-pasts nav reģistrēts']);
+        // Ja lietotājs neeksistē vai parole nepareiza
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            // Viena vispārīga kļūda
+            return back()->withErrors([
+                'login' => 'E-pasts vai parole ir nepareiza.'
+            ])->withInput(['email' => $request->email]);
         }
 
-        if (!Hash::check($request->password, $user->password)) {
-            // Flash error
-            return back()->withErrors(['password' => 'Nepareiza parole']);
-        }
-
+        // Ja viss pareizi, pieteicam lietotāju
         Auth::login($user);
 
         return redirect('/driz')->with('success', 'Veiksmīgi pieteicies!');
@@ -48,8 +46,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-
-        
         return redirect('/')->with('success', 'Tu esi izrakstījies!');
     }
 }

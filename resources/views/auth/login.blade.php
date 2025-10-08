@@ -7,6 +7,42 @@
   @vite(['resources/css/login.css'])
 </head>
 <body>
+  @if (session('success'))
+    <div id="flash-success"
+        style="
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: linear-gradient(135deg, #4CAF50, #2e7d32);
+          color: #fff;
+          padding: 15px 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          font-weight: 500;
+          z-index: 9999;
+          opacity: 0;
+          transform: translateY(-10px);
+          transition: all 0.4s ease;
+        ">
+        <span style="margin-right: 10px;">✅</span> {{ session('success') }}
+    </div>
+
+    <script>
+      const flash = document.getElementById('flash-success');
+      // animēta parādīšanās
+      setTimeout(() => {
+          flash.style.opacity = '1';
+          flash.style.transform = 'translateY(0)';
+      }, 100);
+      // pazūd pēc 4 sekundēm
+      setTimeout(() => {
+          flash.style.opacity = '0';
+          flash.style.transform = 'translateY(-10px)';
+          setTimeout(() => flash.remove(), 400);
+      }, 4000);
+    </script>
+  @endif
+
   <div class="container">
     <!-- Title -->
     <div class="title">Pieteikties</div>

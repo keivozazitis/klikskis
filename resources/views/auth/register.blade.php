@@ -11,6 +11,44 @@
     <!-- Title -->
     <div class="title">Reģistrēties</div>
     <div class="content">
+      @if ($errors->any())
+        <div id="flash-error"
+            style="
+              position: fixed;
+              top: 20px;
+              right: 20px;
+              background: linear-gradient(135deg, #e53935, #b71c1c);
+              color: #fff;
+              padding: 15px 20px;
+              border-radius: 10px;
+              box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+              font-weight: 500;
+              z-index: 9999;
+              opacity: 0;
+              transform: translateY(-10px);
+              transition: all 0.4s ease;
+            ">
+            <ul style="margin:0; padding-left: 15px;">
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+        </div>
+
+        <script>
+          const err = document.getElementById('flash-error');
+          setTimeout(() => {
+              err.style.opacity = '1';
+              err.style.transform = 'translateY(0)';
+          }, 100);
+          setTimeout(() => {
+              err.style.opacity = '0';
+              err.style.transform = 'translateY(-10px)';
+              setTimeout(() => err.remove(), 400);
+          }, 6000);
+        </script>
+      @endif
+
       <!-- Registration form -->
       <form action="{{ route('register') }}" method="POST">
         @csrf

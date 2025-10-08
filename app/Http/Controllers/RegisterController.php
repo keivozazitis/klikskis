@@ -8,16 +8,33 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    /**
+     * Parāda reģistrācijas formu
+     */
     public function show()
     {
         return view('auth.register');
     }
 
+    /**
+     * Apstrādā reģistrācijas pieprasījumu
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name'  => 'required|string|max:255',
+            // ✅ Vārds un uzvārds: tikai burti, atstarpes un domuzīmes
+            'first_name' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/^[a-zA-ZĀ-ž\s\-]+$/u'
+            ],
+            'last_name'  => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/^[a-zA-ZĀ-ž\s\-]+$/u'
+            ],
             'birth_date' => 'required|date|before:-16 years',
             'gender'     => 'required|in:male,female',
             'weight'     => 'nullable|integer|min:1',
@@ -25,9 +42,23 @@ class RegisterController extends Controller
             'region_id'  => 'nullable|exists:regions,id',
             'augums'     => 'nullable|integer|min:1',
             'email'      => 'required|email|unique:users,email',
-            'password'   => 'required|confirmed|min:6',
+
+            // ✅ Paroles validācija: vismaz 6 rakstzīmes, viens lielais burts un viens cipars
+            'password'   => [
+                'required',
+                'confirmed',
+                'min:6',
+                'regex:/^(?=.*[A-Z])(?=.*\d).+$/'
+            ],
+        ], [
+            // Pielāgoti kļūdu paziņojumi
+            'first_name.regex' => 'Vārds drīkst saturēt tikai burtus, atstarpes vai domuzīmes.',
+            'last_name.regex'  => 'Uzvārds drīkst saturēt tikai burtus, atstarpes vai domuzīmes.',
+            'password.regex'   => 'Parolei jābūt vismaz 6 simboliem, ar vismaz vienu lielo burtu un ciparu.',
+            'birth_date.before'=> 'Tev jābūt vismaz 16 gadus vecam.',
         ]);
 
+        // Lietotāja izveide
         User::create([
             'first_name' => $request->first_name,
             'last_name'  => $request->last_name,
@@ -42,6 +73,7 @@ class RegisterController extends Controller
             'password'   => Hash::make($request->password),
         ]);
 
-        return redirect()->back()->with('success', 'User registered!');
+        // Redirect ar flash paziņojumu uz login lapu
+        return redirect('/login')->with('success', 'Reģistrācija veiksmīga! Tagad vari pieteikties.');
     }
 }
