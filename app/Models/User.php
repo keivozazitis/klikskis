@@ -35,4 +35,9 @@ class User extends Authenticatable
         'images' => 'array',
         'email_verified_at' => 'datetime',
     ];
+    public function region()
+{
+    return $this->belongsTo(Region::class);
+}
+
 }

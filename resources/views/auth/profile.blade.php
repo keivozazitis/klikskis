@@ -174,7 +174,7 @@
 
     </form>
     <div style="width: 100%; display: flex; justify-content: space-between; margin-top: 20px; align-items: center;">
-      <a href="/driz">
+      <a href="/users">
             <button type="submit" style="
                   background-color: #ad5ad6;
                   color: #fff;

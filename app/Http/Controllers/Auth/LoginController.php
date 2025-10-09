@@ -37,7 +37,7 @@ class LoginController extends Controller
         // Ja viss pareizi, pieteicam lietotāju
         Auth::login($user);
 
-        return redirect('/driz')->with('success', 'Veiksmīgi pieteicies!');
+        return redirect('/users')->with('success', 'Veiksmīgi pieteicies!');
     }
 
     /**
