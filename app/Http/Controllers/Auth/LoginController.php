@@ -23,7 +23,7 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Atrodam lietotāju pēc e-pasta
+        // Atrod lietotāju pēc e-pasta
         $user = User::where('email', $request->email)->first();
 
         // Ja lietotājs neeksistē vai parole nepareiza

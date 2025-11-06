@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f6f8fb;
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-header {
+    background: linear-gradient(90deg, #4b6cb7, #182848);
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.admin-header nav {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.admin-header nav a,
+.admin-header button {
+    background-color: white;
+    color: #182848;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.admin-header nav button:hover,
+.admin-header nav a:hover {
+    background-color: #dfe6f2;
+}
+
+.logout-form {
+    display: inline;
+}
+
+.admin-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+    margin-top: 0;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.user-table th, .user-table td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 12px;
+    text-align: left;
+}
+
+.user-table th {
+    background-color: #f0f0f0;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+}
+
+.badge.yes {
+    background-color: #28a745;
+}
+
+.badge.no {
+    background-color: #6c757d;
+}
+
+.empty {
+    text-align: center;
+    color: #888;
+    margin: 20px 0;
+}
+
+.admin-footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #182848;
+    color: white;
+    margin-top: 40px;
+}
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #b02a37;
+}

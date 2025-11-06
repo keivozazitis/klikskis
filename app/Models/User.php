@@ -39,5 +39,20 @@ class User extends Authenticatable
 {
     return $this->belongsTo(Region::class);
 }
+// Lietotāji, kurus es esmu likojis
+public function likesGiven() {
+    return $this->hasMany(Like::class, 'user_id');
+}
+
+// Lietotāji, kas like uz mani
+public function likesReceived() {
+    return $this->hasMany(Like::class, 'liked_user_id');
+}
+
+// Matches
+public function matches() {
+    return $this->belongsToMany(User::class, 'likes', 'user_id', 'liked_user_id')
+                ->wherePivot('matched', true);
+}
 
 }

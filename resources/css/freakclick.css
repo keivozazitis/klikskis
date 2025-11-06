@@ -1,0 +1,159 @@
+/* 🌑 FreakClick dark / neon style */
+body.dark-theme {
+    background-color: #0b0014;
+    color: #f0eaff;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.header {
+    background: linear-gradient(90deg, #7209b7, #560bad);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 0 15px #7209b7;
+}
+
+.page-title {
+    text-align: center;
+    margin: 30px 0;
+    font-size: 2rem;
+    color: #c77dff;
+    text-shadow: 0 0 10px #9d4edd;
+}
+
+.cards-section {
+    padding: 20px;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #1a0825;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(157, 78, 221, 0.6);
+}
+
+.card-images {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+}
+
+.card-images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.card-images img.active {
+    display: block;
+}
+
+.card-info {
+    padding: 15px;
+}
+
+.card-info h3 {
+    color: #f7a1ff;
+    margin-bottom: 8px;
+}
+
+.card-info p {
+    font-size: 0.95rem;
+    color: #e0d3f5;
+    margin: 4px 0;
+}
+
+.user-tags {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.user-tags .tag {
+    background: linear-gradient(135deg, #a31aff, #ff00cc);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    text-shadow: 0 0 5px #fff;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.user-tags .tag:hover {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #ff00cc, #a31aff);
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    border-top: 1px solid #3b185f;
+}
+
+.card-actions button {
+    background-color: transparent;
+    border: 2px solid #c77dff;
+    color: #c77dff;
+    border-radius: 50%;
+    font-size: 22px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card-actions button:hover {
+    background-color: #c77dff;
+    color: #1a0825;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: #a87df3;
+    font-size: 14px;
+    background-color: #120017;
+    margin-top: 40px;
+}
+
+.no-users {
+    text-align: center;
+    font-size: 18px;
+    color: #c77dff;
+}
+
+.logout-form {
+    margin-top: 300px;
+    text-align: center;
+}
+
+.logout-btn {
+    background-color: #7209b7;
+    border: none;
+    color: white;
+    padding: 10px 50px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #9d4edd;
+}

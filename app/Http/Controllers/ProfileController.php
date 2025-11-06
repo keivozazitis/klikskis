@@ -15,7 +15,6 @@ class ProfileController extends Controller
      */
     public function destroy()
     {
-        
         $user = auth()->user();
 
         // Dzēš visas saglabātās bildes
@@ -56,7 +55,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        // Validācija
+        // ✅ Validācija
         $request->validate([
             'weight' => 'nullable|numeric|min:0|max:500',
             'bio' => 'nullable|string|max:500',
@@ -64,15 +63,23 @@ class ProfileController extends Controller
             'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'augums' => 'nullable|numeric|min:0|max:500',
             'images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'remove_images' => 'nullable|string'
-
+            'remove_images' => 'nullable|string',
+            'tags' => 'nullable|array',       // 🟢 Pievienots
+            'tags.*' => 'nullable|string|max:255', // 🟢 Pievienots
         ]);
 
-        // Vienkāršie lauki
+        // ✅ Vienkāršie lauki
         $user->weight = $request->weight ?? $user->weight;
         $user->bio = $request->bio ?? $user->bio;
         $user->region_id = $request->region_id;
         $user->augums = $request->augums ?? $user->augums;
+
+        // ✅ Tagi
+        if ($request->has('tags')) {
+            $user->tags = implode(',', $request->input('tags'));
+        } else {
+            $user->tags = null;
+        }
 
         // ✅ Profila bilde
         if ($request->hasFile('profile_photo')) {
@@ -83,10 +90,9 @@ class ProfileController extends Controller
             $user->profile_photo = $request->file('profile_photo')->store('profile_photos', 'public');
         }
 
-        // ✅ Esošās bildes
+        // ✅ Daudzas bildes
         $existingImages = $user->images ? json_decode($user->images, true) : [];
 
-        // ✅ Jaunas bildes – pievieno klāt esošajām
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $path = $image->store('profile_images', 'public');
@@ -94,7 +100,6 @@ class ProfileController extends Controller
             }
         }
 
-        // ✅ Noņemtās bildes
         if ($request->filled('remove_images')) {
             $removeList = explode(',', $request->remove_images);
 
@@ -107,9 +112,9 @@ class ProfileController extends Controller
             }
         }
 
-        // Saglabā atlikušo sarakstu datubāzē
         $user->images = json_encode(array_values($existingImages));
 
+        // ✅ Saglabā visu
         $user->save();
 
         return redirect()->route('profile.edit')->with('success', 'Profils veiksmīgi atjaunināts!');

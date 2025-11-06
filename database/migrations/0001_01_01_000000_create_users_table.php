@@ -19,11 +19,16 @@ return new class extends Migration
             $table->date('birth_date');
             $table->enum('gender', ['male', 'female']);
             $table->boolean('is_admin')->default(false);
-            $table->integer('weight')->nullable(); //kg
+            $table->integer('weight')->nullable(); // kg
             $table->text('bio')->nullable();
             $table->foreignId('region_id')->nullable()->constrained('regions')->onDelete('cascade');
-            $table->integer('augums')->nullable(); //cm
+            $table->integer('augums')->nullable(); // cm
             $table->json('images')->nullable();
+
+            // ✅ Jaunais lauks tagiem
+            // Šeit tiks saglabāti, piemēram: "Freakclick,Smēķēju,Sportoju"
+            $table->string('tags')->nullable();
+
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();

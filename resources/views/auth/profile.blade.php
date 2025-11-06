@@ -162,6 +162,43 @@
             imgs.forEach(img => img.parentElement.remove());
         }
         </script>
+        <div class="input-box">
+            <span class="details">Tagi</span>
+            <div class="tags-container" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                @php
+                $availableTags = ['Freakclick', 'Alkoholu lietoju', 'Alkoholu nelietoju', 'Smēķēju', 'Nesmēķēju', 'Sportoju', 'Nesportoju'];
+                $userTags = $user->tags ? explode(',', $user->tags) : [];
+                @endphp
+
+                @foreach($availableTags as $tag)
+                <label style="background: {{ in_array($tag, $userTags) ? '#ad5ad6' : '#f0f0f0' }};
+                                color: {{ in_array($tag, $userTags) ? 'white' : 'black' }};
+                                padding: 6px 12px;
+                                border-radius: 20px;
+                                cursor: pointer;
+                                transition: 0.2s;"
+                        onclick="toggleTag(this)">
+                    <input type="checkbox" name="tags[]" value="{{ $tag }}" 
+                        style="display:none;" {{ in_array($tag, $userTags) ? 'checked' : '' }}>
+                    {{ $tag }}
+                </label>
+                @endforeach
+            </div>
+        </div>
+
+            <script>
+            function toggleTag(label) {
+            const input = label.querySelector('input');
+            input.checked = !input.checked;
+            if (input.checked) {
+                label.style.background = '#ad5ad6';
+                label.style.color = 'white';
+            } else {
+                label.style.background = '#f0f0f0';
+                label.style.color = 'black';
+            }
+            }
+            </script>
 
 
 
